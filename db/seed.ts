@@ -1,41 +1,87 @@
-import "dotenv/config";
-import { drizzle } from "drizzle-orm/neon-http";
-import { eq } from "drizzle-orm";
-import { usersTable } from "./schema";
+import { db } from ".";
+import { users } from "./schema";
 
-const db = drizzle(process.env.DATABASE_URL!);
+async function seed() {
+  console.log("🌱 Starting database seed...");
 
-async function main() {
-  const user: typeof usersTable.$inferInsert = {
-    name: "John",
-    age: 30,
-    email: "john@example.com",
-  };
+  try {
+    // Clear existing data (optional - remove if you want to keep existing data)
+    await db.delete(users);
+    console.log("🗑️  Cleared existing users");
 
-  await db.insert(usersTable).values(user);
-  console.log("New user created!");
+    // Sample users data
+    const sampleUsers = [
+      {
+        name: "John Doe",
+        email: "john.doe@example.com",
+        clerkId: "user_2abc123def456ghi",
+        firstName: "John",
+        lastName: "Doe",
+        photo: "https://images.clerk.dev/uploaded/img_2abc123def456ghi.jpeg",
+      },
+      {
+        name: "Jane Smith",
+        email: "jane.smith@example.com",
+        clerkId: "user_2xyz789uvw012rst",
+        firstName: "Jane",
+        lastName: "Smith",
+        photo: "https://images.clerk.dev/uploaded/img_2xyz789uvw012rst.jpeg",
+      },
+      {
+        name: "Bob Johnson",
+        email: "bob.johnson@example.com",
+        clerkId: "user_2mno345pqr678stu",
+        firstName: "Bob",
+        lastName: "Johnson",
+        photo: "https://images.clerk.dev/uploaded/img_2mno345pqr678stu.jpeg",
+      },
+      {
+        name: "Alice Wilson",
+        email: "alice.wilson@example.com",
+        clerkId: "user_2efg901hij234klm",
+        firstName: "Alice",
+        lastName: "Wilson",
+        photo: "https://images.clerk.dev/uploaded/img_2efg901hij234klm.jpeg",
+      },
+      {
+        name: "Charlie Brown",
+        email: "charlie.brown@example.com",
+        clerkId: "user_2nop567qrs890tuv",
+        firstName: "Charlie",
+        lastName: "Brown",
+        photo: "https://images.clerk.dev/uploaded/img_2nop567qrs890tuv.jpeg",
+      },
+    ];
 
-  const users = await db.select().from(usersTable);
-  console.log("Getting all users from the database: ", users);
-  /*
-  const users: {
-    id: number;
-    name: string;
-    age: number;
-    email: string;
-  }[]
-  */
+    // Insert users
+    const insertedUsers = await db
+      .insert(users)
+      .values(sampleUsers)
+      .returning();
 
-  await db
-    .update(usersTable)
-    .set({
-      age: 31,
-    })
-    .where(eq(usersTable.email, user.email));
-  console.log("User info updated!");
+    console.log(`✅ Successfully created ${insertedUsers.length} users:`);
+    insertedUsers.forEach((user, index) => {
+      console.log(`   ${index + 1}. ${user.name} (${user.email})`);
+    });
 
-  await db.delete(usersTable).where(eq(usersTable.email, user.email));
-  console.log("User deleted!");
+    // Verify the data
+    const allUsers = await db.select().from(users);
+    console.log(`\n📊 Total users in database: ${allUsers.length}`);
+
+    console.log("\n🎉 Seed completed successfully!");
+  } catch (error) {
+    console.error("❌ Error seeding database:", error);
+    process.exit(1);
+  }
 }
 
-main();
+// Run the seed function
+seed()
+  .then(() => {
+    console.log("🏁 Seed script finished");
+    process.exit(0);
+  })
+  .catch((error) => {
+    console.error("💥 Seed script failed:", error);
+    process.exit(1);
+  });
