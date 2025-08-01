@@ -22,8 +22,8 @@ Open [http://localhost:3000](http://localhost:3000) with your browser to see the
 - [x] Install and configure **Tailwind CSS v4**
 - [x] Install and configure **ShadCN UI**
   - [x] Create a custom shadcn theme
-- [ ] Set up **tRPC**
-- [ ] Configure **Clerk Authentication**
+- [x] Set up **tRPC**
+- [x] Configure **Clerk Authentication**
 
 ## Deploy on Vercel
 
