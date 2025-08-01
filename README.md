@@ -16,15 +16,57 @@ bun dev
 
 Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
-### ✅ TODO:
+### 📜 TODO:
 
-- [x] Install Next.js with App Router (`create-next-app` with `--app`)
-- [x] Install and configure **Tailwind CSS v4**
-- [x] Install and configure **ShadCN UI**
-  - [x] Create a custom **ShadCN UI Theme**
-- [x] Set up **tRPC**
-- [x] Configure **Clerk Authentication**
-- [x] Configure **Neon DB with Drizzle ORM**
+## 🥽 Initial Setup
+
+- ✅ Install **Next.js** with **App Router**
+- ✅ Install and configure **Tailwind CSS v4**
+- ✅ Install and configure **ShadCN UI**
+  - ✅ Create a custom **ShadCN Theme**
+- ✅ Set up **tRPC** for API routing
+- ✅ Configure **Clerk** for authentication
+- ✅ Set up **Neon Database** with **Drizzle ORM**
+- ✅ Add support for **dark mode**, including:
+  - ✅ ShadCN theme compatibility
+  - ✅ Clerk components styling
+
+---
+
+## 🛠️ Feature Development
+
+- [ ] Create **Landing Page**
+  - [ ] Hero section
+  - [ ] Call-to-action
+  - [ ] Responsive design
+- [ ] Build **Dashboard Layout**
+  - [ ] Sidebar navigation
+  - [ ] Header with user menu
+- [ ] Implement **Authentication Guard** using Clerk
+- [ ] Create **CRUD Functionality** for main resource
+  - [ ] Create (Form)
+  - [ ] Read (List view)
+  - [ ] Update (Edit form)
+  - [ ] Delete (Confirmation modal)
+- [ ] Add **API integration** using tRPC
+- [ ] Handle **loading states** and **error boundaries**
+
+---
+
+## 🎨 UI/UX Enhancements
+
+- [ ] Add animations/transitions with Tailwind
+- [ ] Improve mobile responsiveness
+- [ ] Add custom empty states and error pages
+
+---
+
+## 📦 Deployment & Optimization
+
+- ✅ Set up environment variables
+- [ ] Add SEO metadata
+- ✅ Deploy to **Vercel**
+- ✅ Enable preview deployments for branches
 
 ## Deploy on Vercel
 

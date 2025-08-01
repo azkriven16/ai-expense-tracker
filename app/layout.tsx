@@ -1,7 +1,8 @@
 import { TRPCReactProvider } from "@/trpc/client";
-import { ClerkProvider } from "@clerk/nextjs";
 import type { Metadata } from "next";
 
+import ClerkThemeProvider from "@/components/clerk-theme-provider";
+import { ThemeProvider } from "@/components/theme-context";
 import localFont from "next/font/local";
 import "./globals.css";
 
@@ -27,12 +28,29 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <ClerkProvider>
-      <html lang="en">
-        <body className={`${geistSans.variable} ${geistMono.variable}`}>
-          <TRPCReactProvider>{children}</TRPCReactProvider>
-        </body>
-      </html>
-    </ClerkProvider>
+    <html lang="en" suppressHydrationWarning>
+      <head>
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `
+              (function() {
+                const theme = localStorage.getItem('theme') || 
+                  (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+                if (theme === 'dark') {
+                  document.documentElement.classList.add('dark');
+                }
+              })();
+            `,
+          }}
+        />
+      </head>
+      <body className={`${geistSans.variable} ${geistMono.variable}`}>
+        <TRPCReactProvider>
+          <ThemeProvider>
+            <ClerkThemeProvider>{children}</ClerkThemeProvider>
+          </ThemeProvider>
+        </TRPCReactProvider>
+      </body>
+    </html>
   );
 }
