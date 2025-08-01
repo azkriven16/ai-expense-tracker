@@ -1,3 +1,7 @@
+import { ThemeToggle } from "@/components/theme-toggle";
+import { Button } from "@/components/ui/button";
+import { cn } from "@/lib/utils";
+import { poppins } from "@/modules/fonts";
 import {
   SignInButton,
   SignUpButton,
@@ -5,20 +9,59 @@ import {
   SignedOut,
   UserButton,
 } from "@clerk/nextjs";
+import Link from "next/link";
+
 export const Navbar = () => {
   return (
-    <header className="flex justify-end items-center p-4 gap-4 h-16">
-      <SignedOut>
-        <SignInButton />
-        <SignUpButton>
-          <button className="bg-[#6c47ff] text-ceramic-white rounded-full font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 cursor-pointer">
-            Sign Up
-          </button>
-        </SignUpButton>
-      </SignedOut>
-      <SignedIn>
-        <UserButton />
-      </SignedIn>
+    <header
+      className={cn(
+        poppins.className,
+        "flex justify-between items-center p-4 gap-4 h-16"
+      )}
+    >
+      <Link href="/" className="flex-1 text-lg font-bold">
+        Lootsy
+      </Link>
+      <div className="flex justify-between items-center flex-1">
+        <nav>
+          <ul className="flex gap-2">
+            <NavItem href={"/dashboard"} text="Dashboard" />
+            <NavItem href={"/about"} text="About" />
+            <NavItem href={"/contact"} text="Contact" />
+          </ul>
+        </nav>
+        <div className="flex gap-2">
+          <ThemeToggle />
+          <SignedOut>
+            <SignInButton>
+              <Button variant="ghost" className="font-semibold text-base">
+                Sign In
+              </Button>
+            </SignInButton>
+            <SignUpButton>
+              <Button className="font-semibold text-base">Sign Up</Button>
+            </SignUpButton>
+          </SignedOut>
+          <SignedIn>
+            <UserButton />
+          </SignedIn>
+        </div>
+      </div>
     </header>
   );
 };
+
+interface NavItemProps {
+  href: string;
+  text: string;
+}
+
+function NavItem({ href, text }: NavItemProps) {
+  return (
+    <li className="p-2 hover:bg-primary hover:text-primary-foreground">
+      <Link href={href} className="font-semibold text-sm">
+        {text}
+      </Link>
+    </li>
+  );
+}
