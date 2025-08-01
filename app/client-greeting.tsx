@@ -4,10 +4,6 @@ import { useSuspenseQuery } from "@tanstack/react-query";
 
 export function ClientGreeting() {
   const trpc = useTRPC();
-  const { data } = useSuspenseQuery(
-    trpc.hello.queryOptions({
-      text: "hello",
-    })
-  );
-  return <div>{data.greeting} once</div>;
+  const { data } = useSuspenseQuery(trpc.test.queryOptions());
+  return <div>{JSON.stringify(data, null, 2)} once</div>;
 }

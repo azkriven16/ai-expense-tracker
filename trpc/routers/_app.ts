@@ -1,6 +1,19 @@
 import { z } from "zod";
 import { baseProcedure, createTRPCRouter } from "../init";
 export const appRouter = createTRPCRouter({
+  test: baseProcedure.query(async ({ ctx }) => {
+    const { userId } = ctx.auth;
+
+    if (!userId) {
+      return {
+        greeting: "Hello! You are not signed in.",
+      };
+    }
+
+    return {
+      greeting: `Hello ${userId}!`,
+    };
+  }),
   hello: baseProcedure
     .input(
       z.object({
@@ -8,8 +21,6 @@ export const appRouter = createTRPCRouter({
       })
     )
     .query(async (opts) => {
-      await new Promise((resolve) => setTimeout(resolve, 3000));
-
       return {
         greeting: `${opts.input.text}`,
       };
