@@ -36,13 +36,13 @@ export function Footer() {
               Terms
             </Link>
             <Link
-              href="#"
+              href="/about"
               className="text-sm font-medium text-muted-foreground transition-colors hover:text-foreground"
             >
-              Privacy
+              About
             </Link>
             <Link
-              href="#"
+              href="/contact"
               className="text-sm font-medium text-muted-foreground transition-colors hover:text-foreground"
             >
               Contact
