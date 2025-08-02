@@ -1,5 +1,8 @@
+'use client'
+
 import { ThemeToggle } from "@/components/theme-toggle";
 import { Button } from "@/components/ui/button";
+import { useIsMobile } from "@/hooks/use-mobile";
 import { cn } from "@/lib/utils";
 import { poppins } from "@/modules/fonts";
 import {
@@ -12,6 +15,7 @@ import {
 import Link from "next/link";
 
 export const Navbar = () => {
+  const isMobile = useIsMobile()
   return (
     <header
       className={cn(
@@ -22,30 +26,28 @@ export const Navbar = () => {
       <Link href="/" className="flex-1 text-lg font-bold">
         Lootsy
       </Link>
-      <div className="flex justify-between items-center flex-1">
-        <nav>
-          <ul className="flex gap-2">
-            <NavItem href={"/dashboard"} text="Dashboard" />
-            <NavItem href={"/about"} text="About" />
-            <NavItem href={"/contact"} text="Contact" />
-          </ul>
-        </nav>
-        <div className="flex gap-2">
-          <ThemeToggle />
-          <SignedOut>
-            <SignInButton>
-              <Button variant="ghost" className="font-semibold text-base">
-                Sign In
-              </Button>
-            </SignInButton>
-            <SignUpButton>
-              <Button className="font-semibold text-base">Sign Up</Button>
-            </SignUpButton>
-          </SignedOut>
-          <SignedIn>
-            <UserButton />
-          </SignedIn>
-        </div>
+      <nav className="flex-1 flex justify-center">
+        <ul className="flex gap-2">
+          <NavItem href={"/dashboard"} text="Dashboard" />
+          <NavItem href={"/about"} text="About" />
+          <NavItem href={"/contact"} text="Contact" />
+        </ul>
+      </nav>
+      <div className="flex gap-2 flex-1 justify-end">
+        <ThemeToggle />
+        <SignedOut>
+          <SignInButton>
+            <Button variant="ghost" className="font-semibold text-base">
+              Sign In
+            </Button>
+          </SignInButton>
+          <SignUpButton>
+            <Button className="font-semibold text-base">Sign Up</Button>
+          </SignUpButton>
+        </SignedOut>
+        <SignedIn>
+          <UserButton />
+        </SignedIn>
       </div>
     </header>
   );
@@ -64,4 +66,8 @@ function NavItem({ href, text }: NavItemProps) {
       </Link>
     </li>
   );
+}
+
+function MobileNav(){
+
 }
