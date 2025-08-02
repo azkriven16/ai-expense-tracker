@@ -27,20 +27,21 @@ Open [http://localhost:3000](http://localhost:3000) with your browser to see the
 - ✅ Set up **tRPC** for API routing
 - ✅ Configure **Clerk** for authentication
 - ✅ Set up **Neon Database** with **Drizzle ORM**
-- ✅ Add support for **dark mode**, including:
-  - ✅ ShadCN theme compatibility
-  - ✅ Clerk components styling
 
 ---
 
 ## 🛠️ Feature Development
 
+- ✅ Add support for **dark mode**, including:
+  - ✅ ShadCN theme compatibility
+  - ✅ Clerk components styling
 - ✅ Create **Landing Page**
   - ✅ Hero section
   - ✅ Call-to-action
   - ✅ Responsive design
 - [ ] Build **Dashboard Layout**
-  - [ ] Sidebar navigation
+- ✅ Custom clerk authentication page
+  - ✅ Sidebar navigation
   - ✅ Header with user menu
 - ✅ Implement **Authentication Guard** using Clerk
 - [ ] Create **CRUD Functionality** for main resource

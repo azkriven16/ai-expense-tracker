@@ -30,7 +30,9 @@ import {
   SignUpButton,
   UserButton,
 } from "@clerk/nextjs";
-import { ThemeToggle } from "../../../components/theme-toggle";
+import { ThemeToggle } from "../../../components/ui/theme-toggle";
+import { Logo } from "@/components/logo";
+import Link from "next/link";
 
 interface MenuItem {
   title: string;
@@ -51,12 +53,6 @@ interface Navbar1Props {
 }
 
 export const Navbar = ({
-  logo = {
-    url: "/",
-    src: "https://deifkwefumgah.cloudfront.net/shadcnblocks/block/logos/shadcnblockscom-icon.svg",
-    alt: "logo",
-    title: "Lootsy",
-  },
   menu = [
     { title: "Home", url: "/" },
     {
@@ -113,16 +109,7 @@ export const Navbar = ({
         <nav className="hidden justify-between lg:flex">
           <div className="flex items-center gap-6">
             {/* Logo */}
-            <a href={logo.url} className="flex items-center gap-2">
-              <img
-                src={logo.src}
-                className="max-h-8 dark:invert"
-                alt={logo.alt}
-              />
-              <span className="text-lg font-semibold tracking-tighter">
-                {logo.title}
-              </span>
-            </a>
+            <Logo />
             <div className="flex items-center">
               <NavigationMenu>
                 <NavigationMenuList>
@@ -132,12 +119,14 @@ export const Navbar = ({
             </div>
           </div>
           <SignedOut>
-            <SignInButton>
-              <Button variant="ghost">Sign In</Button>
-            </SignInButton>
-            <SignUpButton>
-              <Button>Sign Up</Button>
-            </SignUpButton>
+            <div className="flex items-center gap-5">
+              <Button variant="ghost" asChild>
+                <Link href="/sign-in">Sign In</Link>
+              </Button>
+              <Button asChild>
+                <Link href="/sign-up">Sign Up</Link>
+              </Button>
+            </div>
           </SignedOut>
           <SignedIn>
             <div className="flex items-center gap-5">
@@ -151,13 +140,7 @@ export const Navbar = ({
         <div className="block lg:hidden">
           <div className="flex items-center justify-between">
             {/* Logo */}
-            <a href={logo.url} className="flex items-center gap-2">
-              <img
-                src={logo.src}
-                className="max-h-8 dark:invert"
-                alt={logo.alt}
-              />
-            </a>
+            <Logo />
             <div className="flex gap-5">
               <SignedIn>
                 <UserButton />
@@ -171,13 +154,7 @@ export const Navbar = ({
                 <SheetContent className="overflow-y-auto">
                   <SheetHeader>
                     <SheetTitle>
-                      <a href={logo.url} className="flex items-center gap-2">
-                        <img
-                          src={logo.src}
-                          className="max-h-8 dark:invert"
-                          alt={logo.alt}
-                        />
-                      </a>
+                      <Logo />
                     </SheetTitle>
                   </SheetHeader>
                   <div className="flex flex-col gap-6 p-4">
@@ -189,12 +166,12 @@ export const Navbar = ({
                       {menu.map((item) => renderMobileMenuItem(item))}
                     </Accordion>
                     <SignedOut>
-                      <SignInButton>
-                        <Button variant="ghost">Sign In</Button>
-                      </SignInButton>
-                      <SignUpButton>
-                        <Button>Sign Up</Button>
-                      </SignUpButton>
+                      <Button variant="ghost" asChild>
+                        <Link href="/sign-in">Sign In</Link>
+                      </Button>
+                      <Button asChild>
+                        <Link href="/sign-up">Sign Up</Link>
+                      </Button>
                     </SignedOut>
                   </div>
                 </SheetContent>
