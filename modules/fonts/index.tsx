@@ -1,4 +1,4 @@
-import { Poppins, Lora, Fira_Code } from "next/font/google";
+import { Poppins, Lora, Pixelify_Sans } from "next/font/google";
 
 export const poppins = Poppins({
   subsets: ["latin"],
@@ -10,7 +10,7 @@ export const lora = Lora({
   weight: ["400", "600", "700"],
 });
 
-export const firaCode = Fira_Code({
+export const pixelifySans = Pixelify_Sans({
   subsets: ["latin"],
   weight: ["400", "600", "700"],
 });

@@ -1,15 +1,17 @@
-import { CTASection } from "./cta-section";
-import { FeaturesSection } from "./features-section";
-import { HeroSection } from "./hero-section";
-import { HowItWorksSection } from "./howitworks-section";
-import { StatsSection } from "./stats-section";
+import { cn } from "@/lib/utils";
+import { CTASection } from "../ui/cta-section";
+import { FeaturesSection } from "../ui/features-section";
+import { HeroSection } from "../ui/hero-section";
+import { HowItWorksSection } from "../ui/howitworks-section";
+import { StatsSection } from "../ui/stats-section";
+import { poppins } from "@/modules/fonts";
 
 const Homeview = () => {
   return (
-    <div className="min-h-screen bg-background">
+    <div className={cn(poppins.className, "min-h-screen bg-background")}>
       <HeroSection />
-      <FeaturesSection />
       <StatsSection />
+      <FeaturesSection />
       <HowItWorksSection />
       <CTASection />
     </div>
