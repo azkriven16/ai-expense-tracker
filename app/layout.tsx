@@ -1,8 +1,8 @@
 import { TRPCReactProvider } from "@/trpc/client";
 import type { Metadata } from "next";
 
-import ClerkThemeProvider from "@/components/clerk-theme-provider";
-import { ThemeProvider } from "@/components/theme-context";
+import ClerkThemeProvider from "@/components/ui/clerk-theme-provider";
+import { ThemeProvider } from "@/components/ui/theme-context";
 import "./globals.css";
 
 export const metadata: Metadata = {

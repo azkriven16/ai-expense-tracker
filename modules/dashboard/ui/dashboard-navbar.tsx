@@ -30,7 +30,7 @@ import {
   SignUpButton,
   UserButton,
 } from "@clerk/nextjs";
-import { ThemeToggle } from "../../../components/theme-toggle";
+import { ThemeToggle } from "../../../components/ui/theme-toggle";
 
 interface MenuItem {
   title: string;
