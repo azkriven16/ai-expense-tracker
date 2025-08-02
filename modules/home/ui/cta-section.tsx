@@ -8,12 +8,12 @@ export const CTASection = () => {
 
       <div className="container mx-auto px-4 text-center relative z-10">
         <div className="max-w-4xl mx-auto">
-          <h2 className="text-5xl md:text-7xl font-black text-foreground mb-6 leading-tight">
+          <h2 className="text-xl md:text-5xl font-black text-foreground mb-6 leading-tight">
             Take Control of Your
             <span className="block text-primary">Financial Future</span>
           </h2>
 
-          <p className="text-xl text-muted-foreground mb-12 max-w-2xl mx-auto">
+          <p className="text-lg text-muted-foreground mb-12 max-w-2xl mx-auto">
             Join thousands of users who've transformed their financial habits
             with AI-powered expense tracking. Start your journey to financial
             freedom today.
@@ -22,7 +22,7 @@ export const CTASection = () => {
           <div className="flex flex-col sm:flex-row gap-6 justify-center">
             <Button
               size="lg"
-              className="px-12 py-6 text-xl font-bold rounded-2xl shadow-2xl transform hover:scale-105 transition-all duration-200"
+              className="px-12 py-6 font-bold rounded-2xl shadow-2xl transform hover:scale-105 transition-all duration-200"
             >
               Start Free Trial
               <Brain className="ml-2 w-6 h-6" />
@@ -30,7 +30,7 @@ export const CTASection = () => {
             <Button
               variant="outline"
               size="lg"
-              className="px-12 py-6 text-xl font-bold rounded-2xl"
+              className="px-12 py-6 font-bold rounded-2xl"
             >
               See Pricing
             </Button>

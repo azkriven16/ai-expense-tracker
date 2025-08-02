@@ -35,14 +35,14 @@ Open [http://localhost:3000](http://localhost:3000) with your browser to see the
 
 ## 🛠️ Feature Development
 
-- [ ] Create **Landing Page**
-  - [ ] Hero section
-  - [ ] Call-to-action
-  - [ ] Responsive design
+- ✅ Create **Landing Page**
+  - ✅ Hero section
+  - ✅ Call-to-action
+  - ✅ Responsive design
 - [ ] Build **Dashboard Layout**
   - [ ] Sidebar navigation
-  - [ ] Header with user menu
-- [ ] Implement **Authentication Guard** using Clerk
+  - ✅ Header with user menu
+- ✅ Implement **Authentication Guard** using Clerk
 - [ ] Create **CRUD Functionality** for main resource
   - [ ] Create (Form)
   - [ ] Read (List view)
