@@ -1,4 +1,5 @@
-import { Navbar } from "@/modules/home/ui/navbar";
+import { Footer } from "@/components/footer";
+import { Navbar } from "@/components/navbar";
 import { PropsWithChildren } from "react";
 
 export default function HomeLayout({ children }: PropsWithChildren) {
@@ -6,6 +7,7 @@ export default function HomeLayout({ children }: PropsWithChildren) {
     <div className="flex flex-col">
       <Navbar />
       {children}
+      <Footer />
     </div>
   );
 }
