@@ -1,5 +1,6 @@
 import { Button } from "@/components/ui/button";
 import { ChevronRightIcon } from "lucide-react";
+import Link from "next/link";
 
 export const HeroSection = () => {
   return (
@@ -47,9 +48,11 @@ export const HeroSection = () => {
         </div>
         {/* Buttons */}
         <div className="mt-8 flex justify-center gap-3">
-          <Button size={"lg"}>Start Tracking Free</Button>
-          <Button size={"lg"} variant={"outline"}>
-            See How It Works
+          <Button size={"lg"} asChild>
+            <Link href="/sign-up">Start Tracking Free</Link>
+          </Button>
+          <Button size={"lg"} variant={"outline"} asChild>
+            <Link href="/sign-up">See How It Works</Link>
           </Button>
         </div>
         {/* End Buttons */}

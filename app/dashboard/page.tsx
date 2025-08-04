@@ -3,7 +3,7 @@ import { HydrateClient, prefetch, trpc } from "@/trpc/server";
 import { Suspense } from "react";
 import { ErrorBoundary } from "react-error-boundary";
 
-export default async function Dashboard() {
+export default async function DashboardPage() {
   prefetch(trpc.test.queryOptions());
   return (
     <div className="min-h-screen">
