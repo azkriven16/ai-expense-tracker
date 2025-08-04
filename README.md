@@ -40,7 +40,7 @@ Open [http://localhost:3000](http://localhost:3000) with your browser to see the
   - ✅ Call-to-action
   - ✅ Responsive design
 - [ ] Build **Dashboard Layout**
-- ✅ Custom clerk authentication page
+- ✅ Custom clerk a uthentication page
   - ✅ Sidebar navigation
   - ✅ Header with user menu
 - ✅ Implement **Authentication Guard** using Clerk

@@ -1,5 +1,6 @@
 import { Button } from "@/components/ui/button";
 import { Bell, Brain, Shield, Zap } from "lucide-react";
+import Link from "next/link";
 
 export const CTASection = () => {
   return (
@@ -21,18 +22,10 @@ export const CTASection = () => {
 
           <div className="flex flex-col sm:flex-row gap-6 justify-center">
             <Button
-              size="lg"
+              asChild
               className="px-12 py-6 font-bold rounded-2xl shadow-2xl transform hover:scale-105 transition-all duration-200"
             >
-              Start Free Trial
-              <Brain className="ml-2 w-6 h-6" />
-            </Button>
-            <Button
-              variant="outline"
-              size="lg"
-              className="px-12 py-6 font-bold rounded-2xl"
-            >
-              See Pricing
+              <Link href="/sign-up">Start Free Trial</Link>
             </Button>
           </div>
 
