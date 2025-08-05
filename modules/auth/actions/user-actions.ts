@@ -4,22 +4,6 @@ import { db } from "@/db";
 import { UserInput, users } from "@/db/schema";
 import { eq } from "drizzle-orm";
 
-export const getAllUsers = async () => {
-  const data = await db.select().from(users);
-  return data;
-};
-
-export const getUser = async (userId: string) => {
-  const user = await db.query.users.findMany({
-    where: (users, { eq }) => eq(users.clerkId, userId),
-    with: {
-      records: true,
-    },
-  });
-
-  return user;
-};
-
 export const addUser = async (user: UserInput) => {
   await db
     .insert(users)
@@ -51,8 +35,6 @@ export const updateUser = async (
 };
 
 export const deleteUser = async (clerkId: string) => {
-  // Note: This will also delete all related books due to foreign key constraints
-  // Make sure your database is set up with CASCADE delete if you want this behavior
   const result = await db
     .delete(users)
     .where(eq(users.clerkId, clerkId))
@@ -61,14 +43,6 @@ export const deleteUser = async (clerkId: string) => {
   return result[0];
 };
 
-// Alternative: Delete user by database ID instead of clerkId
-export const deleteUserById = async (userId: number) => {
-  const result = await db.delete(users).where(eq(users.id, userId)).returning();
-
-  return result[0];
-};
-
-// Update user by database ID
 export const updateUserById = async (
   userId: number,
   updatedData: Partial<UserInput>
