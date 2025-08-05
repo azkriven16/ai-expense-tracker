@@ -1,6 +1,6 @@
 import Announcement from "@/modules/dashboard/ui/announcement";
 import { ClientGreeting } from "@/modules/dashboard/views/client-greeting";
-import { getQueryClient, HydrateClient, prefetch, trpc } from "@/trpc/server";
+import { getQueryClient, trpc } from "@/trpc/server";
 import { auth } from "@clerk/nextjs/server";
 import { dehydrate, HydrationBoundary } from "@tanstack/react-query";
 import { Suspense } from "react";
