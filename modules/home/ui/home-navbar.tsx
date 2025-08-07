@@ -101,7 +101,7 @@ export const Navbar = ({
     <section
       className={cn(
         poppins.className,
-        "py-2 px-4 md:px-6 hidden lg:block sticky top-0 z-50 bg-background/80 backdrop-blur-md"
+        "py-2 px-4 md:px-6 block sticky top-0 z-50 bg-background/80 backdrop-blur-md"
       )}
     >
       <div className="container">
@@ -141,10 +141,17 @@ export const Navbar = ({
           <div className="flex items-center justify-between">
             {/* Logo */}
             <Logo />
-            <div className="flex gap-5">
+            <div className="flex items-center gap-2 md:gap-5">
               <SignedIn>
                 <UserButton />
               </SignedIn>
+              <SignedOut>
+                <Button asChild>
+                  <Link href="/sign-up" className="text-xs">
+                    Sign Up
+                  </Link>
+                </Button>
+              </SignedOut>
               <Sheet>
                 <SheetTrigger asChild>
                   <Button variant="outline" size="icon">
