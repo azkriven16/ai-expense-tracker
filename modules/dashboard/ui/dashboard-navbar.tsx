@@ -1,10 +1,4 @@
 import { NavbarItem } from "@/components/navbar-item";
-import {
-  Accordion,
-  AccordionContent,
-  AccordionItem,
-  AccordionTrigger,
-} from "@/components/ui/accordion";
 import { Button } from "@/components/ui/button";
 import {
   NavigationMenu,
@@ -14,24 +8,11 @@ import {
   NavigationMenuList,
   NavigationMenuTrigger,
 } from "@/components/ui/navigation-menu";
-import {
-  Sheet,
-  SheetContent,
-  SheetHeader,
-  SheetTitle,
-  SheetTrigger,
-} from "@/components/ui/sheet";
 import { cn } from "@/lib/utils";
 import { poppins } from "@/modules/fonts";
-import {
-  SignedIn,
-  SignedOut,
-  SignInButton,
-  SignUpButton,
-  UserButton,
-} from "@clerk/nextjs";
-import { Menu } from "lucide-react";
-import { ThemeToggle } from "../../../components/ui/theme-toggle";
+import { SignedIn, SignedOut, SignInButton, SignUpButton } from "@clerk/nextjs";
+import { CustomUserButton } from "@/components/custom-user-button";
+import { Home, BarChart3, History, Brain, Plus } from "lucide-react";
 
 interface MenuItem {
   title: string;
@@ -41,7 +22,7 @@ interface MenuItem {
   items?: MenuItem[];
 }
 
-interface Navbar1Props {
+interface NavbarProps {
   logo?: {
     url: string;
     src: string;
@@ -59,119 +40,171 @@ export const Navbar = ({
     title: "Lootsy",
   },
   menu = [
-    { title: "Dashboard", url: "/dashboard" },
     {
-      title: "Statistics",
-      url: "/about",
+      title: "Dashboard",
+      url: "/dashboard",
+      icon: <Home className="size-5" />,
     },
     {
-      title: "Expense History",
-      url: "/contact",
+      title: "Statistics",
+      url: "/dashboard/statistics",
+      icon: <BarChart3 className="size-5" />,
+    },
+    {
+      title: "History",
+      url: "/dashboard/history",
+      icon: <History className="size-5" />,
     },
     {
       title: "AI Insights",
-      url: "/contact",
+      url: "/dashboard/insights",
+      icon: <Brain className="size-5" />,
     },
   ],
-}: Navbar1Props) => {
+}: NavbarProps) => {
   return (
-    <section className={cn(poppins.className, "py-5 px-4 md:px-6")}>
-      <div className="container">
-        {/* Desktop Menu */}
-        <nav className="hidden justify-between lg:flex">
-          <div className="flex items-center gap-6">
-            {/* Logo */}
-            <a href={logo.url} className="flex items-center gap-2">
-              <img
-                src={logo.src}
-                className="max-h-8 dark:invert"
-                alt={logo.alt}
-              />
-              <span className="text-lg font-semibold tracking-tighter">
-                {logo.title}
-              </span>
-            </a>
-            <div className="flex items-center">
+    <>
+      {/* Desktop Navbar */}
+      <section
+        className={cn(
+          poppins.className,
+          "py-2 px-4 md:px-6 hidden lg:block sticky top-0 z-50 bg-background/80 backdrop-blur-md border-b"
+        )}
+      >
+        <div className="container">
+          <nav className="flex justify-between items-center">
+            <div className="flex items-center gap-6">
+              {/* Logo */}
+              <a href={logo.url} className="flex items-center gap-2">
+                <img
+                  src={logo.src}
+                  className="max-h-8 dark:invert"
+                  alt={logo.alt}
+                />
+                <span className="text-lg font-semibold tracking-tighter">
+                  {logo.title}
+                </span>
+              </a>
+
+              {/* Navigation Menu */}
               <NavigationMenu>
-                <NavigationMenuList className="">
+                <NavigationMenuList>
                   {menu.map((item) => renderMenuItem(item))}
                 </NavigationMenuList>
               </NavigationMenu>
             </div>
-          </div>
-          <SignedOut>
-            <SignInButton>
-              <Button variant="ghost">Sign In</Button>
-            </SignInButton>
-            <SignUpButton>
-              <Button>Sign Up</Button>
-            </SignUpButton>
-          </SignedOut>
-          <SignedIn>
-            <div className="flex items-center gap-5">
-              <ThemeToggle />
-              <UserButton />
-            </div>
-          </SignedIn>
-        </nav>
 
-        {/* Mobile Menu */}
-        <div className="block lg:hidden">
-          <div className="flex items-center justify-between">
-            {/* Logo */}
-            <a href={logo.url} className="flex items-center gap-2">
-              <img
-                src={logo.src}
-                className="max-h-8 dark:invert"
-                alt={logo.alt}
-              />
-            </a>
-            <div className="flex gap-5">
+            {/* Auth Buttons */}
+            <div className="flex items-center gap-4">
+              <SignedOut>
+                <SignInButton>
+                  <Button variant="ghost">Sign In</Button>
+                </SignInButton>
+                <SignUpButton>
+                  <Button>Sign Up</Button>
+                </SignUpButton>
+              </SignedOut>
               <SignedIn>
-                <UserButton />
+                <Button>
+                  <Plus className="size-4 mr-2" />
+                  Add
+                </Button>
+                <CustomUserButton />
               </SignedIn>
-              <Sheet>
-                <SheetTrigger asChild>
-                  <Button variant="outline" size="icon">
-                    <Menu className="size-4" />
-                  </Button>
-                </SheetTrigger>
-                <SheetContent className="overflow-y-auto">
-                  <SheetHeader>
-                    <SheetTitle>
-                      <a href={logo.url} className="flex items-center gap-2">
-                        <img
-                          src={logo.src}
-                          className="max-h-8 dark:invert"
-                          alt={logo.alt}
-                        />
-                      </a>
-                    </SheetTitle>
-                  </SheetHeader>
-                  <div className="flex flex-col gap-6 p-4">
-                    <Accordion
-                      type="single"
-                      collapsible
-                      className="flex w-full flex-col gap-4"
-                    >
-                      {menu.map((item) => renderMobileMenuItem(item))}
-                    </Accordion>
-                    <SignedOut>
-                      <SignInButton>
-                        <Button variant="ghost">Sign In</Button>
-                      </SignInButton>
-                      <SignUpButton>
-                        <Button>Sign Up</Button>
-                      </SignUpButton>
-                    </SignedOut>
-                  </div>
-                </SheetContent>
-              </Sheet>
             </div>
+          </nav>
+        </div>
+      </section>
+
+      {/* Mobile Top Bar */}
+      <section
+        className={cn(poppins.className, "py-4 px-4 block lg:hidden border-b")}
+      >
+        <div className="flex items-center justify-between">
+          {/* Logo */}
+          <a href={logo.url} className="flex items-center gap-2">
+            <img
+              src={logo.src}
+              className="max-h-7 dark:invert"
+              alt={logo.alt}
+            />
+            <span className="text-lg font-semibold tracking-tighter">
+              {logo.title}
+            </span>
+          </a>
+
+          {/* Mobile Auth/User */}
+          <div className="flex items-center gap-3">
+            <SignedOut>
+              <SignInButton>
+                <Button variant="ghost" size="sm">
+                  Sign In
+                </Button>
+              </SignInButton>
+            </SignedOut>
+            <SignedIn>
+              <CustomUserButton />
+            </SignedIn>
           </div>
         </div>
+      </section>
+
+      {/* Mobile Bottom Navigation */}
+      <SignedIn>
+        <div className="lg:hidden fixed bottom-0 left-0 right-0 z-50">
+          <BottomNavigation menu={menu} />
+        </div>
+      </SignedIn>
+    </>
+  );
+};
+
+// Bottom Navigation Component
+const BottomNavigation = ({ menu }: { menu: MenuItem[] }) => {
+  const firstHalf = menu.slice(0, 2);
+  const secondHalf = menu.slice(2);
+
+  return (
+    <nav className="bg-background border-t border-border">
+      <div className="flex items-center justify-around px-2 py-2">
+        {/* First half of menu items */}
+        {firstHalf.map((item) => (
+          <a
+            key={item.title}
+            href={item.url}
+            className="flex flex-col items-center gap-1 px-3 py-2 rounded-lg transition-colors hover:bg-accent hover:text-accent-foreground min-w-0 flex-1"
+          >
+            <div className="text-muted-foreground">{item.icon}</div>
+            <span className="text-xs font-medium text-muted-foreground truncate">
+              {item.title}
+            </span>
+          </a>
+        ))}
+
+        {/* Add Button in Center */}
+        <Button
+          size="sm"
+          className="flex flex-col items-center gap-1 h-auto py-2 px-3 rounded-full min-w-0 flex-1"
+        >
+          <Plus className="size-5" />
+          {/* <span className="text-xs font-medium">Add</span> */}
+        </Button>
+
+        {/* Second half of menu items */}
+        {secondHalf.map((item) => (
+          <a
+            key={item.title}
+            href={item.url}
+            className="flex flex-col items-center gap-1 px-3 py-2 rounded-lg transition-colors hover:bg-accent hover:text-accent-foreground min-w-0 flex-1"
+          >
+            <div className="text-muted-foreground">{item.icon}</div>
+            <span className="text-xs font-medium text-muted-foreground truncate">
+              {item.title}
+            </span>
+          </a>
+        ))}
       </div>
-    </section>
+    </nav>
   );
 };
 
@@ -192,29 +225,6 @@ const renderMenuItem = (item: MenuItem) => {
   }
 
   return <NavbarItem key={item.title} {...item} />;
-};
-
-const renderMobileMenuItem = (item: MenuItem) => {
-  if (item.items) {
-    return (
-      <AccordionItem key={item.title} value={item.title} className="border-b-0">
-        <AccordionTrigger className="text-md py-0 font-semibold hover:no-underline">
-          {item.title}
-        </AccordionTrigger>
-        <AccordionContent className="mt-2">
-          {item.items.map((subItem) => (
-            <SubMenuLink key={subItem.title} item={subItem} />
-          ))}
-        </AccordionContent>
-      </AccordionItem>
-    );
-  }
-
-  return (
-    <a key={item.title} href={item.url} className="text-md font-semibold">
-      {item.title}
-    </a>
-  );
 };
 
 const SubMenuLink = ({ item }: { item: MenuItem }) => {

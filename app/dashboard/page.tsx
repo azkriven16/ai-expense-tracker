@@ -1,4 +1,4 @@
-import { ClientGreeting } from "@/modules/dashboard/views/client-greeting";
+import { DashboardClient } from "@/modules/dashboard/views/dashboard-client";
 import { getQueryClient, trpc } from "@/trpc/server";
 import { dehydrate, HydrationBoundary } from "@tanstack/react-query";
 import { Suspense } from "react";
@@ -9,12 +9,12 @@ export default async function DashboardPage() {
   void queryClient.prefetchQuery(trpc.currentUser.queryOptions());
 
   return (
-    <div className="min-h-screen flex flex-col gap-5 px-4 md:px-">
+    <div className="min-h-screen flex flex-col gap-5 px-4 md:px-6 py-5">
       {/* <Announcement /> */}
       <HydrationBoundary state={dehydrate(queryClient)}>
         <ErrorBoundary fallback={<div>Something went wrong</div>}>
           <Suspense fallback={<div>Loading...</div>}>
-            <ClientGreeting />
+            <DashboardClient />
           </Suspense>
         </ErrorBoundary>
       </HydrationBoundary>

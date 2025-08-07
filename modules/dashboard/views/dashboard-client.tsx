@@ -12,15 +12,16 @@ import {
 import { getRelativeTime } from "@/lib/utils";
 import { useTRPC } from "@/trpc/client";
 import { useSuspenseQuery } from "@tanstack/react-query";
+import { ExpenseChartCard } from "../ui/expense-chart-card";
 
-export function ClientGreeting() {
+export function DashboardClient() {
   const trpc = useTRPC();
   const { data } = useSuspenseQuery(trpc.currentUser.queryOptions());
 
   return (
     <>
-      <div className="grid grid-cols-1 md:grid-cols-2">
-        <Card className="bg-secondary">
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
+        <Card className="bg-secondary h-fit">
           <CardHeader>
             <div className="flex justify-between">
               <CardTitle>Welcome Back, {data.name}</CardTitle>
@@ -41,6 +42,7 @@ export function ClientGreeting() {
             </CardAction>
           </CardContent>
         </Card>
+        <ExpenseChartCard />
       </div>
       {/* <div>{JSON.stringify(data)}</div> */}
     </>
