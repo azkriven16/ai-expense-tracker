@@ -8,7 +8,7 @@ import { poppins } from "@/modules/fonts";
 
 const Homeview = () => {
   return (
-    <div className={cn(poppins.className, "min-h-screen bg-background")}>
+    <div className={cn(poppins.className, "min-h-screen")}>
       <HeroSection />
       <StatsSection />
       <FeaturesSection />

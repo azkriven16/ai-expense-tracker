@@ -18,7 +18,7 @@ import { FcGoogle } from "react-icons/fc";
 
 export default function SignUpPage() {
   return (
-    <div className="grid w-full items-center px-4 sm:justify-center">
+    <div className="container mx-auto px-4 md:px-6 grid w-full items-center sm:justify-center">
       <SignUp.Root>
         <Clerk.Loading>
           {(isGlobalLoading) => (

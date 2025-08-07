@@ -40,18 +40,25 @@ export const HowItWorksSection = () => {
   ];
 
   return (
-    <section className="py-24 bg-background">
-      <div className="container mx-auto px-4">
-        <div className="text-center mb-16">
-          <Badge variant="secondary" className="mb-4">
+    <section className="py-24 md:py-32 bg-background">
+      <div className="container mx-auto px-4 md:px-6 2xl:max-w-[1400px]">
+        <div className="mx-auto mt-5 max-w-2xl text-center">
+          <Badge variant="secondary" className="mb-4 text-xs md:text-sm">
             How It Works
           </Badge>
-          <h2 className="text-3xl font-bold">
+          <h2 className="scroll-m-10 md:scroll-m-20 text-4xl font-extrabold tracking-tight lg:text-5xl">
             Get Started in <span className="text-primary">4 Simple Steps</span>
           </h2>
         </div>
 
-        <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
+        <div className="mx-auto mt-5 max-w-3xl text-center mb-16">
+          <p className="text-muted-foreground text-xs md:text-xl">
+            Follow our simple process to transform how you manage your finances
+            with AI-powered insights.
+          </p>
+        </div>
+
+        <div className="mt-8 grid md:grid-cols-2 lg:grid-cols-4 gap-8">
           {steps.map((step, index) => (
             <div key={index} className="relative group">
               <Card className="hover:shadow-lg transition-all duration-300 h-full border-border">
@@ -59,12 +66,12 @@ export const HowItWorksSection = () => {
                   <Badge className="w-16 h-16 mx-auto rounded-full flex items-center justify-center mb-4 text-xl font-black group-hover:scale-110 transition-transform duration-300">
                     {step.step}
                   </Badge>
-                  <CardTitle className="text-foreground text-xl">
+                  <CardTitle className="text-foreground text-xl font-bold">
                     {step.title}
                   </CardTitle>
                 </CardHeader>
                 <CardContent>
-                  <CardDescription className="text-muted-foreground text-center">
+                  <CardDescription className="text-muted-foreground text-center text-sm md:text-base">
                     {step.description}
                   </CardDescription>
                 </CardContent>
