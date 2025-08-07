@@ -1,46 +1,48 @@
 "use client";
 
+import { Button } from "@/components/ui/button";
+import {
+  Card,
+  CardAction,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
+import { getRelativeTime } from "@/lib/utils";
 import { useTRPC } from "@/trpc/client";
 import { useSuspenseQuery } from "@tanstack/react-query";
-import { useAuth } from "@clerk/nextjs";
-import { Card } from "@/components/ui/card";
-import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
-import { getRelativeTime } from "@/lib/utils";
 
 export function ClientGreeting() {
-  const { userId } = useAuth();
   const trpc = useTRPC();
-  const { data } = useSuspenseQuery(
-    trpc.user.queryOptions({
-      userId: userId!,
-    })
-  );
+  const { data } = useSuspenseQuery(trpc.currentUser.queryOptions());
 
   return (
     <>
       <div className="grid grid-cols-1 md:grid-cols-2">
-        <Card>
-          <div className="p-2">
+        <Card className="bg-secondary">
+          <CardHeader>
             <div className="flex justify-between">
-              <h1>Welcome Back, {data.name}!</h1>
-              <div className="">{getRelativeTime(data?.createdAt)}</div>
+              <CardTitle>Welcome Back, {data.name}</CardTitle>
+              <div className="text-xs font-medium">
+                Joined {getRelativeTime(data?.createdAt)}
+              </div>
             </div>
-            <p className="text-sm text-muted-foreground">
+            <CardDescription className="mt-2 text-xs text-muted-foreground">
               Here's a quick overview of your recent expense activity. Track
               your spending, analyze patterns, and manage your budget
               efficiently!
-            </p>
-            <Avatar>
-              <AvatarImage src={data.photo} />
-              <AvatarFallback>
-                {data.firstName?.[0]}
-                {data.lastName?.[0]}
-              </AvatarFallback>
-            </Avatar>
-          </div>
+            </CardDescription>
+          </CardHeader>
+          <CardContent>
+            <CardAction className="flex justify-between w-full">
+              <Button size="sm">Add new Expense</Button>
+              <Button size="sm">AI Advice</Button>
+            </CardAction>
+          </CardContent>
         </Card>
       </div>
-      <div>{JSON.stringify(data)}</div>
+      {/* <div>{JSON.stringify(data)}</div> */}
     </>
   );
 }

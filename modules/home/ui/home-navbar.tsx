@@ -1,4 +1,5 @@
-import { Book, Menu, Sunset, Trees, Zap } from "lucide-react";
+import { Logo } from "@/components/logo";
+import { NavbarItem } from "@/components/navbar-item";
 import {
   Accordion,
   AccordionContent,
@@ -23,16 +24,10 @@ import {
 } from "@/components/ui/sheet";
 import { cn } from "@/lib/utils";
 import { poppins } from "@/modules/fonts";
-import {
-  SignedIn,
-  SignedOut,
-  SignInButton,
-  SignUpButton,
-  UserButton,
-} from "@clerk/nextjs";
-import { ThemeToggle } from "../../../components/ui/theme-toggle";
-import { Logo } from "@/components/logo";
+import { SignedIn, SignedOut, UserButton } from "@clerk/nextjs";
+import { Book, Menu, Sunset, Trees, Zap } from "lucide-react";
 import Link from "next/link";
+import { ThemeToggle } from "../../../components/ui/theme-toggle";
 
 interface MenuItem {
   title: string;
@@ -200,16 +195,7 @@ const renderMenuItem = (item: MenuItem) => {
     );
   }
 
-  return (
-    <NavigationMenuItem key={item.title}>
-      <NavigationMenuLink
-        href={item.url}
-        className="bg-background hover:bg-muted hover:text-accent-foreground group inline-flex h-10 w-max items-center justify-center rounded-md px-4 py-2 text-sm font-medium transition-colors"
-      >
-        {item.title}
-      </NavigationMenuLink>
-    </NavigationMenuItem>
-  );
+  return <NavbarItem key={item.title} {...item} />;
 };
 
 const renderMobileMenuItem = (item: MenuItem) => {

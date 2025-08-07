@@ -18,8 +18,8 @@ export const getRelativeTime = (timestamp: string | number | Date): string => {
 
   if (diffInSeconds < 60) return "Just now";
   if (diffInSeconds < 3600)
-    return `${Math.floor(diffInSeconds / 60)} minutes ago`;
+    return `${Math.floor(diffInSeconds / 60)} minute(s) ago`;
   if (diffInSeconds < 86400)
-    return `${Math.floor(diffInSeconds / 3600)} hours ago`;
-  return `${Math.floor(diffInSeconds / 86400)} days ago`;
+    return `${Math.floor(diffInSeconds / 3600)} hour(s) ago`;
+  return `${Math.floor(diffInSeconds / 86400)} day(s) ago`;
 };
