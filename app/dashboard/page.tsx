@@ -1,4 +1,3 @@
-import Announcement from "@/modules/dashboard/ui/announcement";
 import { ClientGreeting } from "@/modules/dashboard/views/client-greeting";
 import { getQueryClient, trpc } from "@/trpc/server";
 import { auth } from "@clerk/nextjs/server";
@@ -10,15 +9,11 @@ export default async function DashboardPage() {
   const { userId } = await auth();
 
   const queryClient = getQueryClient();
-  void queryClient.prefetchQuery(
-    trpc.user.queryOptions({
-      userId: userId!,
-    })
-  );
+  void queryClient.prefetchQuery(trpc.currentUser.queryOptions());
 
   return (
-    <div className="min-h-screen">
-      <Announcement />
+    <div className="min-h-screen flex flex-col gap-5 px-4 md:px-">
+      {/* <Announcement /> */}
       <HydrationBoundary state={dehydrate(queryClient)}>
         <ErrorBoundary fallback={<div>Something went wrong</div>}>
           <Suspense fallback={<div>Loading...</div>}>

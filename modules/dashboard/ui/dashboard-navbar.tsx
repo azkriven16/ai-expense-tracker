@@ -1,4 +1,4 @@
-import { Book, Menu, Sunset, Trees, Zap } from "lucide-react";
+import { NavbarItem } from "@/components/navbar-item";
 import {
   Accordion,
   AccordionContent,
@@ -30,6 +30,7 @@ import {
   SignUpButton,
   UserButton,
 } from "@clerk/nextjs";
+import { Menu } from "lucide-react";
 import { ThemeToggle } from "../../../components/ui/theme-toggle";
 
 interface MenuItem {
@@ -58,50 +59,17 @@ export const Navbar = ({
     title: "Lootsy",
   },
   menu = [
-    { title: "Home", url: "/" },
+    { title: "Dashboard", url: "/dashboard" },
     {
-      title: "Products",
-      url: "#",
-      items: [
-        {
-          title: "Company",
-          description: "Our mission is to innovate and empower the world",
-          icon: <Trees className="size-5 shrink-0" />,
-          url: "/about",
-        },
-        {
-          title: "Support",
-          description:
-            "Get in touch with our support team or visit our community forums",
-          icon: <Zap className="size-5 shrink-0" />,
-          url: "/contact",
-        },
-      ],
-    },
-    {
-      title: "Resources",
-      url: "#",
-      items: [
-        {
-          title: "Contact Us",
-          description: "We are here to help you with any questions you have",
-          icon: <Sunset className="size-5 shrink-0" />,
-          url: "/contact",
-        },
-        {
-          title: "Terms of Service",
-          description: "Our terms and conditions for using our services",
-          icon: <Book className="size-5 shrink-0" />,
-          url: "/about",
-        },
-      ],
-    },
-    {
-      title: "About",
+      title: "Statistics",
       url: "/about",
     },
     {
-      title: "Contact",
+      title: "Expense History",
+      url: "/contact",
+    },
+    {
+      title: "AI Insights",
       url: "/contact",
     },
   ],
@@ -125,7 +93,7 @@ export const Navbar = ({
             </a>
             <div className="flex items-center">
               <NavigationMenu>
-                <NavigationMenuList>
+                <NavigationMenuList className="">
                   {menu.map((item) => renderMenuItem(item))}
                 </NavigationMenuList>
               </NavigationMenu>
@@ -223,16 +191,7 @@ const renderMenuItem = (item: MenuItem) => {
     );
   }
 
-  return (
-    <NavigationMenuItem key={item.title}>
-      <NavigationMenuLink
-        href={item.url}
-        className="bg-background hover:bg-muted hover:text-accent-foreground group inline-flex h-10 w-max items-center justify-center rounded-md px-4 py-2 text-sm font-medium transition-colors"
-      >
-        {item.title}
-      </NavigationMenuLink>
-    </NavigationMenuItem>
-  );
+  return <NavbarItem key={item.title} {...item} />;
 };
 
 const renderMobileMenuItem = (item: MenuItem) => {
