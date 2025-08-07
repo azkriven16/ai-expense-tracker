@@ -98,7 +98,12 @@ export const Navbar = ({
   ],
 }: Navbar1Props) => {
   return (
-    <section className={cn(poppins.className, "py-5 px-4 md:px-6")}>
+    <section
+      className={cn(
+        poppins.className,
+        "py-2 px-4 md:px-6 hidden lg:block sticky top-0 z-50 bg-background/80 backdrop-blur-md"
+      )}
+    >
       <div className="container">
         {/* Desktop Menu */}
         <nav className="hidden justify-between lg:flex">
@@ -183,7 +188,9 @@ const renderMenuItem = (item: MenuItem) => {
   if (item.items) {
     return (
       <NavigationMenuItem key={item.title}>
-        <NavigationMenuTrigger>{item.title}</NavigationMenuTrigger>
+        <NavigationMenuTrigger className="text-xs">
+          {item.title}
+        </NavigationMenuTrigger>
         <NavigationMenuContent className="bg-popover text-popover-foreground">
           {item.items.map((subItem) => (
             <NavigationMenuLink asChild key={subItem.title} className="w-80">
