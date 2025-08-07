@@ -1,10 +1,8 @@
 "use client";
 
+import { useTheme } from "@/components/ui/theme-context";
 import { ClerkLoaded, ClerkLoading, UserButton } from "@clerk/nextjs";
 import { Moon, Sun, User2 } from "lucide-react";
-import { useTheme } from "@/components/ui/theme-context";
-import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
-import Image from "next/image";
 
 export const CustomUserButton = () => {
   const { theme, toggleTheme } = useTheme();
