@@ -1,3 +1,5 @@
+import { AddNewExpenseButton } from "@/components/add-new-expense-button";
+import { CustomUserButton } from "@/components/custom-user-button";
 import { NavbarItem } from "@/components/navbar-item";
 import { Button } from "@/components/ui/button";
 import {
@@ -11,8 +13,7 @@ import {
 import { cn } from "@/lib/utils";
 import { poppins } from "@/modules/fonts";
 import { SignedIn, SignedOut, SignInButton, SignUpButton } from "@clerk/nextjs";
-import { CustomUserButton } from "@/components/custom-user-button";
-import { Home, BarChart3, History, Brain, Plus } from "lucide-react";
+import { BarChart3, Brain, History, Home, Plus } from "lucide-react";
 
 interface MenuItem {
   title: string;
@@ -105,10 +106,7 @@ export const Navbar = ({
                 </SignUpButton>
               </SignedOut>
               <SignedIn>
-                <Button>
-                  <Plus className="size-4 mr-2" />
-                  Add
-                </Button>
+                <AddNewExpenseButton />
                 <CustomUserButton />
               </SignedIn>
             </div>

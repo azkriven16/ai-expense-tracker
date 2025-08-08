@@ -16,7 +16,7 @@ import { ExpenseChartCard } from "../ui/expense-chart-card";
 
 export function DashboardClient() {
   const trpc = useTRPC();
-  const { data } = useSuspenseQuery(trpc.currentUser.queryOptions());
+  const { data } = useSuspenseQuery(trpc.users.currentUser.queryOptions());
 
   return (
     <>
@@ -44,7 +44,6 @@ export function DashboardClient() {
         </Card>
         <ExpenseChartCard />
       </div>
-      {/* <div>{JSON.stringify(data)}</div> */}
     </>
   );
 }

@@ -4,6 +4,7 @@ import type { Metadata } from "next";
 import ClerkThemeProvider from "@/components/ui/clerk-theme-provider";
 import { ThemeProvider } from "@/components/ui/theme-context";
 import "./globals.css";
+import { Toaster } from "@/components/ui/sonner";
 
 export const metadata: Metadata = {
   title: "Create Next App",
@@ -35,7 +36,10 @@ export default function RootLayout({
       <body className={`antialiased`}>
         <TRPCReactProvider>
           <ThemeProvider>
-            <ClerkThemeProvider>{children}</ClerkThemeProvider>
+            <ClerkThemeProvider>
+              {children}
+              <Toaster />
+            </ClerkThemeProvider>
           </ThemeProvider>
         </TRPCReactProvider>
       </body>

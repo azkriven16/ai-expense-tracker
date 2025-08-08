@@ -5,8 +5,8 @@ export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs));
 }
 
-export async function delay() {
-  return await new Promise((resolve) => setTimeout(resolve, 3000));
+export async function delay(input: number) {
+  return await new Promise((resolve) => setTimeout(resolve, input));
 }
 
 export const getRelativeTime = (timestamp: string | number | Date): string => {
