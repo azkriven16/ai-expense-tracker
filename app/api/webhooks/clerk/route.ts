@@ -6,7 +6,7 @@ import {
   addUser,
   updateUser,
   deleteUser,
-} from "@/modules/auth/actions/user-actions";
+} from "@/modules/auth/server/user-actions";
 
 export async function POST(req: NextRequest) {
   try {
