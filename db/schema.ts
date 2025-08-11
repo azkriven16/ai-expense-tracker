@@ -1,13 +1,13 @@
+import { relations } from "drizzle-orm";
 import {
+  index,
+  pgEnum,
   pgTable,
+  real,
   serial,
   text,
   timestamp,
-  real,
-  uuid,
-  index,
 } from "drizzle-orm/pg-core";
-import { relations } from "drizzle-orm";
 
 export const users = pgTable("users", {
   id: serial("id").primaryKey(),
@@ -21,6 +21,19 @@ export const users = pgTable("users", {
   updatedAt: timestamp("updated_at").notNull().defaultNow(),
 });
 
+export const categoryEnum = pgEnum("category", [
+  "🍔 Food & Dining",
+  "🚌 Transportation",
+  "🛍️ Shopping",
+  "🎬 Entertainment",
+  "💡 Bills & Utilities",
+  "🩺 Healthcare",
+  "✈️ Travel",
+  "🎓 Education",
+  "💼 Business",
+  "🔖 Other",
+]);
+
 export const records = pgTable(
   "records",
   {
@@ -29,7 +42,7 @@ export const records = pgTable(
       .$defaultFn(() => crypto.randomUUID()),
     text: text("text").notNull(),
     amount: real("amount").notNull(),
-    category: text("category").notNull().default("Other"),
+    category: categoryEnum("category").notNull().default("🔖 Other"),
     date: timestamp("date").notNull().defaultNow(),
     userId: text("userId")
       .notNull()
@@ -61,3 +74,5 @@ export type UserInput = Omit<NewUser, "id" | "createdAt" | "updatedAt">;
 export type Record = typeof records.$inferSelect;
 export type NewRecord = typeof records.$inferInsert;
 export type RecordInput = Omit<NewRecord, "id" | "createdAt">;
+
+export const categories = categoryEnum.enumValues;
