@@ -1,6 +1,6 @@
 import { db } from "@/db";
 import { records } from "@/db/schema";
-import { createRecordSchema } from "@/modules/records/schema";
+import { createRecordSchema } from "@/modules/dashboard/schema";
 import { baseProcedure, createTRPCRouter } from "@/trpc/init";
 import { TRPCError } from "@trpc/server";
 import { z } from "zod";
