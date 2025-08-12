@@ -7,9 +7,6 @@ import { useSuspenseQuery } from "@tanstack/react-query";
 export const CreateRecordView = () => {
   const trpc = useTRPC();
   const { data } = useSuspenseQuery(trpc.users.currentUser.queryOptions());
-  return (
-    <div>
-      <CreateRecordForm userId={data.clerkId} />
-    </div>
-  );
+
+  return <CreateRecordForm userId={data.clerkId} />;
 };

@@ -1,7 +1,13 @@
+"use client";
 import { PlusIcon } from "lucide-react";
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 
 export const AddNewExpenseButton = () => {
+  const path = usePathname();
+
+  if (path === "/dashboard/create") return <></>;
+
   return (
     <Link href="/dashboard/create">
       <button className="bg-slate-800 no-underline group cursor-pointer relative shadow-2xl shadow-zinc-900 rounded-full p-px text-xs font-semibold leading-6  text-white inline-block">

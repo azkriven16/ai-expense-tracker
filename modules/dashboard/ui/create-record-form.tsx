@@ -5,7 +5,7 @@ import { format } from "date-fns";
 import { CalendarIcon, Loader2 } from "lucide-react";
 import { useForm } from "react-hook-form";
 import { toast } from "sonner";
-import * as z from "zod";
+import type * as z from "zod";
 
 import { Button } from "@/components/ui/button";
 import { Calendar } from "@/components/ui/calendar";
@@ -30,13 +30,13 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-import { cn, delay } from "@/lib/utils";
+import { cn } from "@/lib/utils";
 
 // Import from your schema
 import { categories } from "@/db/schema";
-import { createRecordSchema } from "../schema";
 import { useTRPC } from "@/trpc/client";
 import { useMutation } from "@tanstack/react-query";
+import { createRecordSchema } from "../schema";
 
 type CreateRecordFormData = z.infer<typeof createRecordSchema>;
 
@@ -58,7 +58,7 @@ export function CreateRecordForm({ userId }: CreateRecordFormProps) {
       onSuccess: () => {
         toast.dismiss(loadingToastId);
         toast.success("Record created successfully!", {
-          description: `Added ${form.getValues().category} expense of ${form
+          description: `Added ${form.getValues().category} expense of $${form
             .getValues()
             .amount?.toFixed(2)}`,
         });
@@ -99,30 +99,36 @@ export function CreateRecordForm({ userId }: CreateRecordFormProps) {
   };
 
   return (
-    <div className="max-w-md mx-auto p-6 bg-white rounded-lg shadow-sm border">
-      <div className="mb-6">
-        <h2 className="text-2xl font-semibold text-gray-900">
+    <div className="w-full max-w-5xl mx-auto">
+      <div className="mb-8">
+        <h2 className="text-3xl font-semibold text-foreground">
           Add New Expense
         </h2>
-        <p className="text-sm text-gray-600 mt-1">
+        <p className="text-base text-muted-foreground mt-2">
           Track your spending by adding a new expense record
         </p>
       </div>
 
       <Form {...form}>
-        <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4">
-          {/* Description Field */}
+        <form
+          onSubmit={form.handleSubmit(onSubmit)}
+          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"
+        >
+          {/* Description Field - spans full width on all screens */}
           <FormField
             control={form.control}
             name="text"
             render={({ field }) => (
-              <FormItem>
-                <FormLabel>Description</FormLabel>
+              <FormItem className="md:col-span-2 lg:col-span-3">
+                <FormLabel className="text-base font-medium">
+                  Description
+                </FormLabel>
                 <FormControl>
                   <Input
                     placeholder="e.g., Lunch at restaurant"
                     {...field}
                     disabled={createRecordMutation.isPending}
+                    className="h-12 text-base"
                   />
                 </FormControl>
                 <FormMessage />
@@ -136,7 +142,9 @@ export function CreateRecordForm({ userId }: CreateRecordFormProps) {
             name="amount"
             render={({ field }) => (
               <FormItem>
-                <FormLabel>Amount ($)</FormLabel>
+                <FormLabel className="text-base font-medium">
+                  Amount ($)
+                </FormLabel>
                 <FormControl>
                   <Input
                     type="number"
@@ -147,11 +155,12 @@ export function CreateRecordForm({ userId }: CreateRecordFormProps) {
                     onChange={(e) => {
                       const value = e.target.value;
                       field.onChange(
-                        value === "" ? undefined : parseFloat(value)
+                        value === "" ? undefined : Number.parseFloat(value)
                       );
                     }}
                     value={field.value ?? ""}
                     disabled={createRecordMutation.isPending}
+                    className="h-12 text-base"
                   />
                 </FormControl>
                 <FormMessage />
@@ -165,14 +174,16 @@ export function CreateRecordForm({ userId }: CreateRecordFormProps) {
             name="category"
             render={({ field }) => (
               <FormItem>
-                <FormLabel>Category</FormLabel>
+                <FormLabel className="text-base font-medium">
+                  Category
+                </FormLabel>
                 <Select
                   onValueChange={field.onChange}
                   value={field.value}
                   disabled={createRecordMutation.isPending}
                 >
                   <FormControl>
-                    <SelectTrigger>
+                    <SelectTrigger className="h-12 text-base">
                       <SelectValue placeholder="Select a category" />
                     </SelectTrigger>
                   </FormControl>
@@ -195,14 +206,14 @@ export function CreateRecordForm({ userId }: CreateRecordFormProps) {
             name="date"
             render={({ field }) => (
               <FormItem className="flex flex-col">
-                <FormLabel>Date</FormLabel>
+                <FormLabel className="text-base font-medium">Date</FormLabel>
                 <Popover>
                   <PopoverTrigger asChild>
                     <FormControl>
                       <Button
                         variant="outline"
                         className={cn(
-                          "w-full pl-3 text-left font-normal",
+                          "w-full h-12 pl-3 text-left font-normal text-base",
                           !field.value && "text-muted-foreground"
                         )}
                         disabled={createRecordMutation.isPending}
@@ -233,21 +244,23 @@ export function CreateRecordForm({ userId }: CreateRecordFormProps) {
             )}
           />
 
-          {/* Submit Button */}
-          <Button
-            type="submit"
-            className="w-full"
-            disabled={createRecordMutation.isPending}
-          >
-            {createRecordMutation.isPending ? (
-              <>
-                <Loader2 className="mr-2 h-4 w-4 animate-spin" />
-                Creating...
-              </>
-            ) : (
-              "Create Record"
-            )}
-          </Button>
+          {/* Submit Button - spans full width */}
+          <div className="md:col-span-2 lg:col-span-3 pt-4">
+            <Button
+              type="submit"
+              className="w-full h-12 text-base font-medium"
+              disabled={createRecordMutation.isPending}
+            >
+              {createRecordMutation.isPending ? (
+                <>
+                  <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+                  Creating...
+                </>
+              ) : (
+                "Create Record"
+              )}
+            </Button>
+          </div>
         </form>
       </Form>
     </div>

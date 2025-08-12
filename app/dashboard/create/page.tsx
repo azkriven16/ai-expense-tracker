@@ -2,7 +2,7 @@ import { Suspense } from "react";
 import { ErrorBoundary } from "react-error-boundary";
 import { dehydrate, HydrationBoundary } from "@tanstack/react-query";
 import { getQueryClient, trpc } from "@/trpc/server";
-import { CreateRecordView } from "@/modules/records/views/create-record-view";
+import { CreateRecordView } from "@/modules/dashboard/views/create-record-view";
 
 export default async function CreatePage() {
   const queryClient = getQueryClient();
