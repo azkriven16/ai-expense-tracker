@@ -5,6 +5,7 @@ import ClerkThemeProvider from "@/components/ui/clerk-theme-provider";
 import { ThemeProvider } from "@/components/ui/theme-context";
 import "./globals.css";
 import { Toaster } from "@/components/ui/sonner";
+import { InstallPrompt } from "@/components/install-prompt";
 
 export const metadata: Metadata = {
   title: "Create Next App",
@@ -39,6 +40,7 @@ export default function RootLayout({
             <ClerkThemeProvider>
               {children}
               <Toaster />
+              <InstallPrompt />
             </ClerkThemeProvider>
           </ThemeProvider>
         </TRPCReactProvider>
