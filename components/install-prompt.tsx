@@ -24,7 +24,7 @@ export function InstallPrompt() {
   useEffect(() => {
     // Check if it's iOS
     const iOS =
-      /iPad|iPhone|iPod/.test(navigator.userAgent) && !(window as any).MSStream;
+      /iPad|iPhone|iPod/.test(navigator.userAgent) && !("MSStream" in window);
     setIsIOS(iOS);
 
     // Check if already installed (standalone mode)
@@ -121,7 +121,8 @@ export function InstallPrompt() {
             ) : (
               <div>
                 <p className="text-sm text-muted-foreground mb-3">
-                  Install this app for a better experience and quick launch.
+                  Install this app for a better experience with offline access
+                  and quick launch.
                 </p>
                 <div className="flex gap-2">
                   <Button onClick={handleInstallClick} size="sm">
