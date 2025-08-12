@@ -163,11 +163,7 @@ export const recordsRouter = createTRPCRouter({
           date: expense.createdAt.toISOString(),
         }));
 
-        const answer = await generateAIAnswer(
-          input.question,
-          expenseData,
-          input.insightId
-        );
+        const answer = await generateAIAnswer(input.question, expenseData);
         return answer;
       } catch (error) {
         console.error("Error generating insight answer:", error);

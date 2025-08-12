@@ -178,8 +178,7 @@ export async function categorizeExpense(description: string): Promise<string> {
 
 export async function generateAIAnswer(
   question: string,
-  context: ExpenseRecord[],
-  insightId?: string
+  context: ExpenseRecord[]
 ): Promise<string> {
   if (!question || question.trim().length === 0) {
     return "Please provide a specific question about your expenses.";
