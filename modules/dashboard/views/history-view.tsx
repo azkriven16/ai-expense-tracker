@@ -10,7 +10,6 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 import { ScrollArea } from "@/components/ui/scroll-area";
-import { Separator } from "@/components/ui/separator";
 import {
   Table,
   TableBody,
@@ -22,38 +21,7 @@ import {
 import { useTRPC } from "@/trpc/client";
 import { useSuspenseQuery } from "@tanstack/react-query";
 import { format } from "date-fns";
-import {
-  CalendarDays,
-  DollarSign,
-  EditIcon,
-  FileText,
-  Trash2Icon,
-  TrendingDownIcon,
-  TrendingUpIcon,
-} from "lucide-react";
-
-interface Record {
-  id: string;
-  text: string;
-  amount: number;
-  category: string;
-  date: string;
-  userId: string;
-  createdAt: string;
-}
-
-interface UserData {
-  id: number;
-  name: string;
-  email: string;
-  clerkId: string;
-  firstName: string;
-  lastName: string;
-  photo: string;
-  createdAt: string;
-  updatedAt: string;
-  records: Record[];
-}
+import { EditIcon, FileText, Trash2Icon } from "lucide-react";
 
 interface HistoryViewProps {
   userId: string;
@@ -65,26 +33,12 @@ export function HistoryView({ userId }: HistoryViewProps) {
     trpc.records.userWithRecords.queryOptions({
       userId,
     })
-  ) as { data: UserData };
-
-  const totalAmount = data.records.reduce(
-    (sum, record) => sum + record.amount,
-    0
   );
-  const totalRecords = data.records.length;
 
   // Sort records by date (newest first)
   const sortedRecords = [...data.records].sort(
     (a, b) => new Date(b.date).getTime() - new Date(a.date).getTime()
   );
-
-  const positiveAmount = data.records
-    .filter((record) => record.amount > 0)
-    .reduce((sum, record) => sum + record.amount, 0);
-
-  const negativeAmount = data.records
-    .filter((record) => record.amount < 0)
-    .reduce((sum, record) => sum + Math.abs(record.amount), 0);
 
   const handleEdit = (recordId: string) => {
     console.log("Edit record:", recordId);
@@ -98,74 +52,8 @@ export function HistoryView({ userId }: HistoryViewProps) {
 
   return (
     <div className="space-y-4">
-      {/* Redesigned stats cards to be more compact on mobile */}
-      <div className="grid grid-cols-2 lg:grid-cols-4 gap-3">
-        <Card className="p-3">
-          <div className="flex items-center gap-2">
-            <div className="p-1.5 bg-blue-100 dark:bg-blue-900/20 rounded-md">
-              <FileText className="h-3.5 w-3.5 text-blue-600 dark:text-blue-400" />
-            </div>
-            <div className="min-w-0 flex-1">
-              <p className="text-xs text-muted-foreground truncate">Records</p>
-              <p className="text-lg font-semibold">{totalRecords}</p>
-            </div>
-          </div>
-        </Card>
-
-        <Card className="p-3">
-          <div className="flex items-center gap-2">
-            <div className="p-1.5 bg-green-100 dark:bg-green-900/20 rounded-md">
-              <TrendingUpIcon className="h-3.5 w-3.5 text-green-600 dark:text-green-400" />
-            </div>
-            <div className="min-w-0 flex-1">
-              <p className="text-xs text-muted-foreground truncate">Income</p>
-              <p className="text-lg font-semibold text-green-600 dark:text-green-400">
-                ${positiveAmount.toLocaleString()}
-              </p>
-            </div>
-          </div>
-        </Card>
-
-        <Card className="p-3">
-          <div className="flex items-center gap-2">
-            <div className="p-1.5 bg-red-100 dark:bg-red-900/20 rounded-md">
-              <TrendingDownIcon className="h-3.5 w-3.5 text-red-600 dark:text-red-400" />
-            </div>
-            <div className="min-w-0 flex-1">
-              <p className="text-xs text-muted-foreground truncate">Expenses</p>
-              <p className="text-lg font-semibold text-red-600 dark:text-red-400">
-                ${negativeAmount.toLocaleString()}
-              </p>
-            </div>
-          </div>
-        </Card>
-
-        <Card className="p-3">
-          <div className="flex items-center gap-2">
-            <div className="p-1.5 bg-purple-100 dark:bg-purple-900/20 rounded-md">
-              <DollarSign className="h-3.5 w-3.5 text-purple-600 dark:text-purple-400" />
-            </div>
-            <div className="min-w-0 flex-1">
-              <p className="text-xs text-muted-foreground truncate">
-                Net Total
-              </p>
-              <p
-                className={`text-lg font-semibold ${
-                  totalAmount >= 0
-                    ? "text-green-600 dark:text-green-400"
-                    : "text-red-600 dark:text-red-400"
-                }`}
-              >
-                ${Math.abs(totalAmount).toLocaleString()}
-              </p>
-            </div>
-          </div>
-        </Card>
-      </div>
-
-      {/* Completely redesigned table with mobile-first card layout */}
-      <Card>
-        <CardHeader className="pb-4">
+      <Card className="gap-2 md:gap-5">
+        <CardHeader>
           <div className="flex items-center justify-between">
             <div>
               <CardTitle className="text-xl">Transaction History</CardTitle>
@@ -194,7 +82,7 @@ export function HistoryView({ userId }: HistoryViewProps) {
           ) : (
             <>
               <div className="block md:hidden">
-                <ScrollArea className="h-[500px]">
+                <ScrollArea className="h-[600px]">
                   <div className="space-y-3 p-6">
                     {sortedRecords.map((record) => (
                       <Card
@@ -354,32 +242,6 @@ export function HistoryView({ userId }: HistoryViewProps) {
           )}
         </CardContent>
       </Card>
-
-      {/* Simplified account summary */}
-      {sortedRecords.length > 0 && (
-        <Card>
-          <CardContent className="p-4">
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 text-sm">
-              <div>
-                <span className="text-muted-foreground block mb-1">
-                  Account ID
-                </span>
-                <code className="text-xs bg-muted px-2 py-1 rounded font-mono">
-                  {data.clerkId.slice(0, 12)}...
-                </code>
-              </div>
-              <div>
-                <span className="text-muted-foreground block mb-1">
-                  Last Updated
-                </span>
-                <span className="text-sm">
-                  {format(new Date(data.updatedAt), "MMM dd, yyyy")}
-                </span>
-              </div>
-            </div>
-          </CardContent>
-        </Card>
-      )}
     </div>
   );
 }

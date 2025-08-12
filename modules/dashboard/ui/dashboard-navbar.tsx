@@ -14,6 +14,7 @@ import { cn } from "@/lib/utils";
 import { poppins } from "@/modules/fonts";
 import { SignedIn, SignedOut, SignInButton, SignUpButton } from "@clerk/nextjs";
 import { BarChart3, Brain, History, Home, Plus } from "lucide-react";
+import Link from "next/link";
 
 interface MenuItem {
   title: string;
@@ -76,7 +77,7 @@ export const Navbar = ({
           <nav className="flex justify-between items-center">
             <div className="flex items-center gap-6">
               {/* Logo */}
-              <a href={logo.url} className="flex items-center gap-2">
+              <Link href={logo.url} className="flex items-center gap-2">
                 <img
                   src={logo.src}
                   className="max-h-8 dark:invert"
@@ -85,7 +86,7 @@ export const Navbar = ({
                 <span className="text-lg font-semibold tracking-tighter">
                   {logo.title}
                 </span>
-              </a>
+              </Link>
 
               {/* Navigation Menu */}
               <NavigationMenu>
@@ -120,7 +121,7 @@ export const Navbar = ({
       >
         <div className="flex items-center justify-between">
           {/* Logo */}
-          <a href={logo.url} className="flex items-center gap-2">
+          <Link href={logo.url} className="flex items-center gap-2">
             <img
               src={logo.src}
               className="max-h-7 dark:invert"
@@ -129,7 +130,7 @@ export const Navbar = ({
             <span className="text-lg font-semibold tracking-tighter">
               {logo.title}
             </span>
-          </a>
+          </Link>
 
           {/* Mobile Auth/User */}
           <div className="flex items-center gap-3">
@@ -167,7 +168,7 @@ const BottomNavigation = ({ menu }: { menu: MenuItem[] }) => {
       <div className="flex items-center justify-around px-2 py-2">
         {/* First half of menu items */}
         {firstHalf.map((item) => (
-          <a
+          <Link
             key={item.title}
             href={item.url}
             className="flex flex-col items-center gap-1 px-3 py-2 rounded-lg transition-colors hover:bg-accent hover:text-accent-foreground min-w-0 flex-1"
@@ -176,7 +177,7 @@ const BottomNavigation = ({ menu }: { menu: MenuItem[] }) => {
             <span className="text-xs font-medium text-muted-foreground truncate">
               {item.title}
             </span>
-          </a>
+          </Link>
         ))}
 
         {/* Add Button in Center */}
@@ -184,13 +185,17 @@ const BottomNavigation = ({ menu }: { menu: MenuItem[] }) => {
           size="sm"
           className="flex flex-col items-center gap-1 h-auto py-2 px-3 rounded-full min-w-0 flex-1"
         >
-          <Plus className="size-5" />
-          {/* <span className="text-xs font-medium">Add</span> */}
+          <Link
+            href={"/dashboard/create"}
+            className="flex items-center justify-center w-full h-full"
+          >
+            <Plus className="size-5" />
+          </Link>
         </Button>
 
         {/* Second half of menu items */}
         {secondHalf.map((item) => (
-          <a
+          <Link
             key={item.title}
             href={item.url}
             className="flex flex-col items-center gap-1 px-3 py-2 rounded-lg transition-colors hover:bg-accent hover:text-accent-foreground min-w-0 flex-1"
@@ -199,7 +204,7 @@ const BottomNavigation = ({ menu }: { menu: MenuItem[] }) => {
             <span className="text-xs font-medium text-muted-foreground truncate">
               {item.title}
             </span>
-          </a>
+          </Link>
         ))}
       </div>
     </nav>
@@ -227,7 +232,7 @@ const renderMenuItem = (item: MenuItem) => {
 
 const SubMenuLink = ({ item }: { item: MenuItem }) => {
   return (
-    <a
+    <Link
       className="hover:bg-muted hover:text-accent-foreground flex select-none flex-row gap-4 rounded-md p-3 leading-none no-underline outline-none transition-colors"
       href={item.url}
     >
@@ -240,6 +245,6 @@ const SubMenuLink = ({ item }: { item: MenuItem }) => {
           </p>
         )}
       </div>
-    </a>
+    </Link>
   );
 };
