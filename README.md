@@ -39,18 +39,22 @@ Open [http://localhost:3000](http://localhost:3000) with your browser to see the
   - ✅ Hero section
   - ✅ Call-to-action
   - ✅ Responsive design
-- [ ] Build **Dashboard Layout**
+- [✅] Build **Dashboard Layout**
 - ✅ Custom clerk a uthentication page
   - ✅ Sidebar navigation
   - ✅ Header with user menu
 - ✅ Implement **Authentication Guard** using Clerk
 - [ ] Create **CRUD Functionality** for main resource
-  - [ ] Create (Form)
-  - [ ] Read (List view)
+  - [✅] Create (Form)
+  - [✅] Read (List view)
   - [ ] Update (Edit form)
   - [ ] Delete (Confirmation modal)
-- [ ] Add **API integration** using tRPC
-- [ ] Handle **loading states** and **error boundaries**
+- [✅] Add **API integration** using tRPC
+- [✅] Handle **loading states** and **error boundaries**
+- [ ] Make this a **Progressive Web App** (PWA)
+  - [ ] Add next-pwa or custom service worker setup
+  - [ ] Configure manifest.json and icons
+  - [ ] nable offline caching & install prompts
 
 ---
 
