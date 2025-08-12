@@ -111,7 +111,7 @@ export function InstallPrompt() {
                 <p className="text-sm text-muted-foreground mb-3">
                   To install this app on your iOS device, tap the share button
                   <Share className="inline w-4 h-4 mx-1" />
-                  and then "Add to Home Screen"
+                  and then &ldquo;Add to Home Screen&rdquo;
                   <Plus className="inline w-4 h-4 mx-1" />
                 </p>
                 <Button onClick={handleDismiss} size="sm">
